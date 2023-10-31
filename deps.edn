@@ -1,0 +1,16 @@
+{:paths ["src" "resources"]
+ :deps {integrant/integrant {:mvn/version "0.8.1"}
+        ring/ring-core {:mvn/version "1.10.0"}
+        ring/ring-jetty-adapter {:mvn/version "1.10.0"}
+        metosin/reitit-ring {:mvn/version "0.6.0"}
+        metosin/reitit-middleware {:mvn/version "0.6.0"}
+        seancorfield/next.jdbc {:mvn/version "1.2.659"}
+        aero/aero {:mvn/version "1.1.6"}
+        hiccup/hiccup {:mvn/version "2.0.0-RC2"}
+        com.xtdb/xtdb-core {:mvn/version "1.24.1"}
+        com.xtdb/xtdb-rocksdb {:mvn/version "1.24.1"}}
+ :aliases
+ {:dev {:extra-paths ["dev"]
+        :extra-deps {integrant/repl {:mvn/version "0.3.3"}
+                     nrepl/nrepl {:mvn/version "1.0.0"}}
+        :main-opts ["-m" "nrepl.cmdline" "--interactive" "--color"]}}}
