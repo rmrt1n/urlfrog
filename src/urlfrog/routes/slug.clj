@@ -8,8 +8,8 @@
         existing (xt/q (xt/db node)
                        '{:find [long-url]
                          :in [slug]
-                         :where [[e :slug slug]
-                                 [e :long-url long-url]]}
+                         :where [[url :short-url/slug slug]
+                                 [url :short-url/long-url long-url]]}
                        slug)]
     (if (empty? existing)
       (res/not-found "not found")

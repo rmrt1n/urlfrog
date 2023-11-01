@@ -12,8 +12,9 @@
   (let [node (:db req)]
     (res/response
      (str (xt/q (xt/db node)
-                '{:find [e (pull e [*])]
-                  :where [[e :xt/id _]]})))))
+                '{:find [url (pull url [*])]
+                  :where [[url :xt/id _]
+                          [url :short-url/slug]]})))))
 
 (def middleware-db
   {:name ::db

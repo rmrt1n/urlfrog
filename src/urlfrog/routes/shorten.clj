@@ -17,9 +17,9 @@
 (defn put-url [node url slug]
   (xt/submit-tx node
                 [[::xt/put {:xt/id (java.util.UUID/randomUUID)
-                            :long-url url
-                            :slug slug
-                            :created-at (java.util.Date.)}]])
+                            :short-url/long-url url
+                            :short-url/slug slug
+                            :short-url/created-at (java.util.Date.)}]])
   (xt/sync node))
 
 (defn shorten [req]
@@ -29,8 +29,8 @@
         existing (xt/q (xt/db node)
                        '{:find [slug]
                          :in [long-url]
-                         :where [[e :long-url long-url]
-                                 [e :slug slug]]}
+                         :where [[url :short-url/long-url long-url]
+                                 [url :short-url/slug slug]]}
                        url)
         res-url (str (-> req :headers (get "host"))
                      "/"
