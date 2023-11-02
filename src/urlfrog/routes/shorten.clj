@@ -2,7 +2,6 @@
   (:require [xtdb.api :as xt]
             [hiccup2.core :as h]
             [ring.util.response :as res]
-            [clojure.string :as str]
             [clojure.math :as math]
             [clojure.java.io :as io]))
 
@@ -23,7 +22,7 @@
   (xt/sync node))
 
 (defn shorten [req]
-  (let [url (-> req :params (select-keys [:url]) :url)
+  (let [url (-> req :form-params (get "url"))
         node (:db req)
         slug (slug (rand (dec (math/pow 62 7))))
         existing (xt/q (xt/db node)
@@ -40,9 +39,9 @@
     (res/response
      (str
       (h/html
-       [:div {:style (str/join ";" ["padding: 1rem"
-                                    "background-color: #bbf7d0"
-                                    "border-radius: var(--border-radius)"])}
+       [:div {:style {:padding "1rem"
+                      :background-color "#bbf7d0"
+                      :border-radius "var(--border-radius)"}}
         [:p
          [:strong "Here's your short URL:"]]
         [:a#short-url {:href (str "http://" res-url) :target "_blank"} res-url]

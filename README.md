@@ -3,7 +3,8 @@
 Url shortener written in clojure. Readme in progress...
 
 ## Todo
-- [ ] learn datalog for real
+- [x] learn datalog for real
+- [ ] form validation
 - [ ] auth with cookies
 - [ ] analytics on visited links
 - [ ] babashka tasks

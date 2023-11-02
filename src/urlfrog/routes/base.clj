@@ -13,11 +13,10 @@
               (keyword "hx-on::after-request") "if (event.detail.successful) this.reset()"}
        [:div
         [:label {:for "url"} "Paste your URL here"]
-        [:input {:id "url"
-                 :name "url"
-                 :required true
-                 :type "url"
-                 :size 32
-                 :placeholder "https://example.com"}]]
+        [:input#url {:name "url"
+                     :required true
+                     :type "url"
+                     :size 32
+                     :placeholder "https://example.com"}]]
        [:button.btn-primary {:style "display: block; margin-top: .5rem;"} "Shorten URL"]]
       [:div#result]]))))

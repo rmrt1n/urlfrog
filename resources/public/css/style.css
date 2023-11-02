@@ -1,0 +1,21 @@
+.flex {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.space-y-2 > * + *{
+  margin-top: .5rem;
+}
+
+.space-y-4 > * + *{
+  margin-top: 1rem;
+}
+
+.space-x-2 > * + *{
+  margin-left: .5rem;
+}
+
+.space-x-4 > * + *{
+  margin-left: 1rem;
+}

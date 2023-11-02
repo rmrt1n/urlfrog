@@ -1,12 +1,13 @@
 (ns urlfrog.handler
   (:require [reitit.ring :as ring]
             [reitit.ring.middleware.parameters :as params]
-            [ring.middleware.keyword-params :refer [wrap-keyword-params]]
+            [ring.middleware.session :as sesh]
             [ring.util.response :as res]
             [xtdb.api :as xt]
             [urlfrog.routes.base :refer [index]]
             [urlfrog.routes.shorten :refer [shorten]]
-            [urlfrog.routes.slug :refer [slug]]))
+            [urlfrog.routes.slug :refer [slug]]
+            [urlfrog.routes.auth :as auth]))
 
 (defn all [req]
   (let [node (:db req)]
@@ -27,12 +28,13 @@
   (ring/ring-handler
    (ring/router
     [["/"        {:get index}]
+     ["/sign-in" {:get auth/sign-in}]
      ["/shorten" {:post shorten}]
      ["/all"     {:get all}]
      ["/:slug"   {:get slug}]]
     {:data {:db db
             :middleware [params/parameters-middleware
-                         wrap-keyword-params
+                         sesh/wrap-session
                          middleware-db]}
      :conflicts nil})
    (ring/routes
